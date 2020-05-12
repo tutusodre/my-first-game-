@@ -1,0 +1,55 @@
+import playsound
+from sys import exit
+from random import randint, randrange
+import pygame
+pygame.init()
+
+janela = pygame.display.set_mode((700, 700))
+pygame.display.set_caption("Lua")
+
+new = 2;
+
+x = 350
+y = 350
+height = 20
+widht = 20
+vel = 5
+
+
+z = randrange(5,700+1,5)
+c = z
+altura = 20
+horizontal = 20
+
+var = True
+
+while var:
+    pygame.time.delay(100)
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            var = False
+
+    janela.fill((0, 0, 0))
+    pygame.draw.rect((janela), (255, 0, 0), (x, y, height, widht))
+    pygame.draw.rect((janela), (0, 255, 0), (z, c, altura, horizontal))
+    pygame.display.update()
+
+    tecla = pygame.key.get_pressed()
+    if tecla[pygame.K_RIGHT] and x < 700 - widht - vel:
+        x = x + vel
+    if tecla[pygame.K_LEFT] and x > 0 + vel:
+        x = x - vel
+    if tecla[pygame.K_UP] and y > 0 + vel:
+        y = y - vel
+    if tecla[pygame.K_DOWN] and y < 700 - height - vel:
+        y = y + vel
+    if x == z and y == c:
+        exit()
+
+
+    if tecla[pygame.K_e]:
+        print(x, y)
+
+
+
+pygame.quit()
